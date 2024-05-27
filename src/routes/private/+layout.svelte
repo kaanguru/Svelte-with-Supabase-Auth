@@ -13,7 +13,19 @@
 	};
 </script>
 
-<button on:click={logout}>Logout</button>
 <main>
+	<button on:click={logout}>Logout</button>
 	<slot />
 </main>
+
+<style>
+	main {
+		margin: 1rem 0rem;
+		display: flex;
+		flex-direction: column;
+	}
+	button {
+		margin-top: 2rem;
+		align-self: flex-end;
+	}
+</style>

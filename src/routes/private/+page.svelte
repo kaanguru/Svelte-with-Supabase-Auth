@@ -35,9 +35,10 @@
 </ul>
 <form on:submit={handleSubmit}>
 	<label>
-		Add a note
+		Write a note
 		<input name="note" type="text" />
 	</label>
+	<button type="submit">Add</button>
 </form>
 
 <style>

@@ -1,5 +1,6 @@
 <script>
 	import { goto, invalidate } from '$app/navigation';
+	import { redirect } from '@sveltejs/kit';
 	import { onMount } from 'svelte';
 
 	export let data;
@@ -12,9 +13,9 @@
 				 * Queue this as a task so the navigation won't prevent the
 				 * triggering function from completing
 				 */
-				/* 	setTimeout(() => {
+				setTimeout(() => {
 					goto('/', { invalidateAll: true });
-				}); */
+				});
 			}
 			if (newSession?.expires_at !== session?.expires_at) {
 				invalidate('supabase:auth');
@@ -26,11 +27,9 @@
 </script>
 
 <header>
-	<nav>
-		<p>
-			<a href="/">Public</a> |
-			<a href="/private">Private</a>
-		</p>
-	</nav>
+	<p>
+		<a href="/"> <button>Public</button> </a> |
+		<a href="/auth"> <button>Private</button> </a>
+	</p>
 </header>
 <slot />
