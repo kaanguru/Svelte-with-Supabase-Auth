@@ -1,6 +1,5 @@
 <script>
 	import { goto, invalidate } from '$app/navigation';
-	import { redirect } from '@sveltejs/kit';
 	import { onMount } from 'svelte';
 
 	export let data;
@@ -9,13 +8,11 @@
 	onMount(() => {
 		const { data } = supabase.auth.onAuthStateChange((_, newSession) => {
 			if (!newSession) {
-				/**
-				 * Queue this as a task so the navigation won't prevent the
-				 * triggering function from completing
-				 */
 				setTimeout(() => {
-					goto('/', { invalidateAll: true });
-				});
+					goto('/', {
+						invalidateAll: true
+					});
+				}, 3000);
 			}
 			if (newSession?.expires_at !== session?.expires_at) {
 				invalidate('supabase:auth');
@@ -28,8 +25,18 @@
 
 <header>
 	<p>
-		<a href="/"> <button>Public</button> </a> |
-		<a href="/auth"> <button>Private</button> </a>
+		<a href="/"> Public </a>
+		<a href="/auth"> Private </a>
 	</p>
 </header>
 <slot />
+
+<style>
+	p a {
+		font-size: large;
+		padding: 2rem;
+	}
+	p {
+		border-bottom: thick double burlywood;
+	}
+</style>

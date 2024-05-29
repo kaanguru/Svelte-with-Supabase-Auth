@@ -10,10 +10,10 @@ export const actions: Actions = {
 
 		const { error } = await supabase.auth.signUp({ email, password });
 		if (error) {
-			console.error(error);
+			console.error(error.code);
 			return redirect(303, '/auth/error');
 		} else {
-			return redirect(303, '/');
+			return redirect(303, '/auth');
 		}
 	},
 	login: async ({ request, locals: { supabase } }) => {

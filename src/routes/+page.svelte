@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" runes>
 	export let data;
 	$: ({ countries } = data);
 </script>
@@ -6,7 +6,7 @@
 <div>
 	{#if countries.length > 0}
 		<table>
-			<caption>country list</caption>
+			<caption>Public Country List</caption>
 			<thead>
 				<tr>
 					<th>Name</th>
@@ -26,3 +26,10 @@
 		<p>Loading...</p>
 	{/if}
 </div>
+
+<style>
+	thead,
+	caption {
+		color: brown;
+	}
+</style>
