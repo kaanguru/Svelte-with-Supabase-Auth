@@ -12,7 +12,7 @@
 					goto('/', {
 						invalidateAll: true
 					});
-				}, 3000);
+				}, 1500);
 			}
 			if (newSession?.expires_at !== session?.expires_at) {
 				invalidate('supabase:auth');
