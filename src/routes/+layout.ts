@@ -26,14 +26,30 @@ export const load = async ({ data, depends, fetch }) => {
 					}
 				}
 			});
+	// Attempt to get the session
+	let session = null;
+	try {
+		const {
+			data: { session: fetchedSession }
+		} = await supabase.auth.getSession();
+		session = fetchedSession;
+	} catch (error) {
+		console.error('Failed to get session:', error);
+	}
 
-	const {
-		data: { session }
-	} = await supabase.auth.getSession();
-
-	const {
-		data: { user }
-	} = await supabase.auth.getUser();
+	// Validate the session by attempting to get the user
+	let user = null;
+	if (session) {
+		const {
+			data: { user: fetchedUser },
+			error
+		} = await supabase.auth.getUser();
+		if (error) {
+			console.error('Failed to validate session:', error);
+		} else {
+			user = fetchedUser;
+		}
+	}
 
 	return { session, supabase, user };
 };
